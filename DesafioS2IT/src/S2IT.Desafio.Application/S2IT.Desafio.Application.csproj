@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +45,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppService\AmigoAppService.cs" />
+    <Compile Include="AppService\AppService.cs" />
+    <Compile Include="AppService\EmprestimoAppService.cs" />
+    <Compile Include="AppService\JogoAppService.cs" />
+    <Compile Include="AppService\StatusEmprestimoAppService.cs" />
+    <Compile Include="AppService\UsuarioAppService.cs" />
+    <Compile Include="AutoMapper\AutoMapperConfig.cs" />
+    <Compile Include="Interfaces\IAmigoAppService.cs" />
+    <Compile Include="Interfaces\IAppService.cs" />
+    <Compile Include="Interfaces\IEmprestimoAppService.cs" />
+    <Compile Include="Interfaces\IJogoAppService.cs" />
+    <Compile Include="Interfaces\IStatusEmprestimoAppService.cs" />
+    <Compile Include="Interfaces\IUsuarioAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AmigoViewModel.cs" />
+    <Compile Include="ViewModels\EmprestimoViewModel.cs" />
+    <Compile Include="ViewModels\JogoViewModel.cs" />
+    <Compile Include="ViewModels\StatusEmprestimoViewModel.cs" />
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\S2IT.Desafio.Domain\S2IT.Desafio.Domain.csproj">
+      <Project>{9416dae7-0e49-428b-b064-5d31775ad38c}</Project>
+      <Name>S2IT.Desafio.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

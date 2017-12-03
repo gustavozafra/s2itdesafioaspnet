@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S2IT.Desafio.Domain.Entities
+namespace S2IT.Desafio.Application.ViewModels
 {
-    [Table("STATUSEMPRESTIMO")]
-    public class StatusEmprestimo
+    public class StatusEmprestimoViewModel
     {
         /// <summary>
         /// 1 - Emprestado
         /// 2 - Devolvido
         /// </summary>
-        [Column("IDEMPRESTIMO")]
         public long IdStatusEmprestimo { get; set; }
 
-        [Column("DESCRICAO")]
         public string Descricao { get; set; }
 
-        public List<Emprestimo> Emprestimos { get; set; }
+        public List<EmprestimoViewModel> Emprestimos { get; set; }
     }
 }

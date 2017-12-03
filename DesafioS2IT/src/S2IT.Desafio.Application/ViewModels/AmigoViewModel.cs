@@ -1,41 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S2IT.Desafio.Domain.Entities
+namespace S2IT.Desafio.Application.ViewModels
 {
-    [Table("AMIGO")]
-    public class Amigo
+    public class AmigoViewModel
     {
-        [Column("IDAMIGO")]
         public long IdAmigo { get; set; }
 
-        [Column("NOME")]
         public string Nome { get; set; }
 
-        [Column("EMAIL")]
         public string Email { get; set; }
 
-        [Column("TELEFONE")]
         public string Telefone { get; set; }
 
-        [Column("DATANASCIMENTO")]
         public DateTime DataNascimento { get; set; }
 
-        [Column("DATAMODIFICACAO")]
         public DateTime DataModificacao { get; set; }
 
-        [Column("FLAGATIVO")]
         public bool FlagAtivo { get; set; }
 
-        [Column("IDUSUARIO")]
         public long IdUsuario { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        public UsuarioViewModel Usuario { get; set; }
 
-        public virtual ICollection<Emprestimo> Emprestimos { get; set; }
+        public List<EmprestimoViewModel> Emprestimos { get; set; }
     }
 }

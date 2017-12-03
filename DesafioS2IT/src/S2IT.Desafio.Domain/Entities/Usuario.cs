@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace S2IT.Desafio.Domain.Entities
 {
-    [Table("AMIGO")]
-    public class Amigo
+    [Table("USUARIO")]
+    public class Usuario
     {
-        [Column("IDAMIGO")]
-        public long IdAmigo { get; set; }
+        [Column("IDUSUARIO")]
+        public long IdUsuario { get; set; }
 
-        [Column("NOME")]
-        public string Nome { get; set; }
+        [Column("LOGIN")]
+        public string Login { get; set; }
+
+        [Column("SENHA")]
+        public string Senha { get; set; }
 
         [Column("EMAIL")]
         public string Email { get; set; }
@@ -22,19 +25,15 @@ namespace S2IT.Desafio.Domain.Entities
         [Column("TELEFONE")]
         public string Telefone { get; set; }
 
-        [Column("DATANASCIMENTO")]
-        public DateTime DataNascimento { get; set; }
-
         [Column("DATAMODIFICACAO")]
         public DateTime DataModificacao { get; set; }
 
         [Column("FLAGATIVO")]
         public bool FlagAtivo { get; set; }
 
-        [Column("IDUSUARIO")]
-        public long IdUsuario { get; set; }
+        public virtual ICollection<Amigo> Amigos { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        public virtual ICollection<Jogo> Jogos { get; set; }
 
         public virtual ICollection<Emprestimo> Emprestimos { get; set; }
     }

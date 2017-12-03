@@ -21,5 +21,12 @@ namespace S2IT.Desafio.Domain.Entities
 
         [Column("FLAGATIVO")]
         public bool FlagAtivo { get; set; }
+
+        [Column("IDUSUARIO")]
+        public long IdUsuario { get; set; }
+
+        public virtual Usuario Usuario { get; set; }
+
+        public virtual ICollection<Emprestimo> Emprestimos { get; set; }
     }
 }

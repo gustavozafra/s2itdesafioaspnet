@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleInjector\Bootstrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\S2IT.Desafio.Application\S2IT.Desafio.Application.csproj">
+      <Project>{edbb622b-91f1-44d3-a4bb-40a9ac0dd584}</Project>
+      <Name>S2IT.Desafio.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\S2IT.Desafio.Domain\S2IT.Desafio.Domain.csproj">
+      <Project>{9416dae7-0e49-428b-b064-5d31775ad38c}</Project>
+      <Name>S2IT.Desafio.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\S2IT.Desafio.Infra.Data\S2IT.Desafio.Infra.Data.csproj">
+      <Project>{421b9050-0d7f-453a-8e55-3272b4dbe6ba}</Project>
+      <Name>S2IT.Desafio.Infra.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

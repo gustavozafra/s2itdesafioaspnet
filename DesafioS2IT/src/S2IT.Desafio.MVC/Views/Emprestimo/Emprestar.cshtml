@@ -1,0 +1,71 @@
+﻿@model S2IT.Desafio.MVC.Models.EmprestimoUiModel
+
+<h2>Emprestar Jogo</h2>
+
+<form id="formEmprestar" name="formEmprestar" method="POST">
+    <div class="columns">
+        <div class="column">
+            <label class="label">Amigo</label>
+            <div class="select">
+                <select name="AmigoId">
+                    @foreach (var amigo in Model.Amigos)
+                    {
+                        <option value="@amigo.IdAmigo">@amigo.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="column">
+            <label class="label">Jogo</label>
+            <div class="select">
+                <select name="JogoId">
+                    @foreach (var jogo in Model.Jogos)
+                    {
+                        <option value="@jogo.IdJogo">@jogo.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="column">
+            <button class="button is-primary" type="submit">Emprestar</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //
+        $("#formEmprestar").validate({
+            rules: {
+                'JogoId': { required: true },
+                'AmigoId': { required: true }
+            },
+            messages: {
+                'JogoId': { required: 'Selecione' },
+                'AmigoId': { required: 'Selecione' }
+            },
+            submitHandler: function (form) {
+
+                //
+                jQuery.ajax({
+                    url: '@Url.Action("Emprestar", "Emprestimo")',
+                    type: "POST",
+                    dataType: "json",
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.sucesso) {
+                            window.location.href = '@Url.Action("Index", "Emprestimo")';
+
+                        }
+                        else {
+                            swal("Oops", data.mensagem, "error")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    });
+</script>

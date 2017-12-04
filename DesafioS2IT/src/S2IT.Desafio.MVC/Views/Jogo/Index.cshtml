@@ -1,0 +1,74 @@
+﻿@model IEnumerable<S2IT.Desafio.Application.ViewModels.JogoViewModel>
+
+<h2>Meus Jogos</h2>
+
+<div class="box">
+    <form id="formCadastrar" name="formCadastrar" method="post">
+        <div class="columns">
+            <div class="column">
+                <label class="label">Nome do Jogo</label>
+                <p class="control has-icon has-icon-right">
+                    <input class="input" type="text" name="jogo.Nome" placeholder="Nome do Jogo">
+                </p>
+            </div>
+            <div class="column">
+                <button class="button is-primary" type="submit">Salvar</button>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //
+        $("#formCadastrar").validate({
+            rules: {
+                'jogo.Nome': { required: true }
+            },
+            messages: {
+                'jogo.Nome': { required: 'Infomrme o Nome do Jogo' }
+            },
+            submitHandler: function (form) {
+
+                //
+                jQuery.ajax({
+                    url: '@Url.Action("Cadastrar", "Jogo")',
+                    type: "POST",
+                    dataType: "json",
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.sucesso) {
+                            window.location.reload();
+
+                        }
+                        else {
+                            swal("Oops", data.mensagem, "error")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    });
+</script>

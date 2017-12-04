@@ -1,0 +1,164 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<section class="hero is-fullheight is-dark is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-5 is-offset-1">
+                    <h1 class="title">
+                        Login
+                    </h1>
+                    <div class="box">
+                        <form id="formLogin" name="formLogin" method="post">
+                            <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+                            <label class="label">Login</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="text" name="Usuario" placeholder="Ex: joao">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <label class="label">Senha</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="password" name="Senha" placeholder="Ex: 123456">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <hr>
+                            <p class="control">
+                                <button class="button is-primary" type="submit">Login</button>
+                            </p>
+                        </form>
+                    </div>
+                    <p class="has-text-centered">
+                        <a href="#">Esqueci minha Senha</a>
+                    </p>
+                </div>
+                <div class="column is-5 is-offset-1">
+                    <h1 class="title">
+                        Cadastre-se
+                    </h1>
+                    <div class="box">
+                        <form id="formCadastrar" name="formCadastrar" method="post">
+
+                            <label class="label">Login</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="text" name="usuario.Login" placeholder="Login">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <label class="label">Senha</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="password" name="usuario.Senha" placeholder="Senha">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <label class="label">E-mail</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="text" name="usuario.Email" placeholder="E-mail">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <label class="label">Telefone</label>
+                            <p class="control has-icon has-icon-right">
+                                <input class="input" type="text" name="usuario.Telefone" placeholder="Telefone">
+                                <span class="icon is-small">
+                                    <i class="fa fa-warning"></i>
+                                </span>
+                            </p>
+                            <hr>
+                            <p class="control">
+                                <button class="button is-primary" type="submit">Cadastre-se</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        jQuery.validator.addMethod("noSpace", function (value, element) {
+            return value.indexOf(" ") < 0 && value != "";
+        }, "Não é permido espaços em branco para usuario");
+
+        //
+        $("#formCadastrar").validate({
+            rules: {
+                'usuario.Login': { required: true, noSpace: true },
+                'usuario.Senha': { required: true },
+                'usuario.Email': { required: true, email: true }
+            },
+            messages: {
+                'usuario.Login': { required: 'Informe seu login' },
+                'usuario.Senha': { required: 'Informe sua Senha' },
+                'usuario.Email': { required: 'Informe seu e-mail' }
+            },
+            submitHandler: function (form) {
+
+                //
+                jQuery.ajax({
+                    url: '@Url.Action("Cadastrar", "Login")',
+                    type: "POST",
+                    dataType: "json",
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.sucesso) {
+                            swal("Sucesso", data.mensagem, "success")
+                        }
+                        else {
+                            swal("Oops", data.mensagem, "error")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+
+        //
+        $("#formLogin").validate({
+            rules: {
+                Usuario: { required: true, noSpace: true },
+                Senha: { required: true }
+            },
+            messages: {
+                Usuario: { required: 'Informe seu login' },
+                Senha: { required: 'Informe sua Senha' }
+            },
+            submitHandler: function (form) {
+
+                //
+                jQuery.ajax({
+                    url: '@Url.Action("Login", "Login")',
+                    type: "POST",
+                    data: $(form).serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.sucesso) {
+                            window.location.reload();
+                        }
+                        else {
+                            swal("Oops", data.mensagem, "error")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+        });
+    });
+</script>

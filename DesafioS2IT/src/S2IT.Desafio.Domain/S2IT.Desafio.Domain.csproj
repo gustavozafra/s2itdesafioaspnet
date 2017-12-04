@@ -64,14 +64,11 @@
     <Compile Include="Interfaces\Services\IEmprestimoService.cs" />
     <Compile Include="Interfaces\Services\IJogoService.cs" />
     <Compile Include="Interfaces\Services\IService.cs" />
-    <Compile Include="Interfaces\Services\IStatusEmprestimoService.cs" />
     <Compile Include="Interfaces\Services\IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AmigoService.cs" />
     <Compile Include="Services\EmprestimoService.cs" />
     <Compile Include="Services\JogoService.cs" />
-    <Compile Include="Services\Service.cs" />
-    <Compile Include="Services\StatusEmprestimoService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup />

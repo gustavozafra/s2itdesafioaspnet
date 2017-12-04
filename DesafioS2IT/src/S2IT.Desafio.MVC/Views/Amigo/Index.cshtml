@@ -1,0 +1,100 @@
+﻿@model IEnumerable<S2IT.Desafio.Application.ViewModels.AmigoViewModel>
+
+<h2>Meus Amigos</h2>
+
+<div class="box">
+    <form id="formCadastrar" name="formCadastrar" method="post">
+        <div class="columns">
+            <div class="column">
+                <label class="label">Nome</label>
+                <p class="control has-icon has-icon-right">
+                    <input class="input" type="text" name="amigo.Nome" placeholder="Nome do Amigo">
+                </p>
+            </div>
+            <div class="column">
+                <label class="label">Email</label>
+                <p class="control has-icon has-icon-right">
+                    <input class="input" type="text" name="amigo.Email" placeholder="Email">
+                </p>
+            </div>
+            <div class="column">
+                <label class="label">Telefone</label>
+                <p class="control has-icon has-icon-right">
+                    <input class="input" type="text" name="amigo.Telefone" placeholder="Telefone">
+                </p>
+            </div>
+            <div class="column">
+                <label class="label">Aniversário</label>
+                <p class="control has-icon has-icon-right">
+                    <input class="input" type="date" name="amigo.DataNascimento" placeholder="Aniversario">
+                </p>
+            </div>
+            <div class="column">
+                <button class="button is-primary" type="submit">Salvar</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Email</td>
+                <td>@item.Telefone</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //
+        $("#formCadastrar").validate({
+            rules: {
+                'amigo.Nome': { required: true },
+                'amigo.DataNascimento': { required: true },
+                'amigo.Email': { required: true, email: true }
+            },
+            messages: {
+                'amigo.Nome': { required: 'Informe o nome do amigo' },
+                'amigo.DataNascimento': { required: 'Informe a data de aniversario do amigo' },
+                'amigo.Email': { required: 'Informe o email do amigo' }
+            },
+            submitHandler: function (form) {
+
+                //
+                jQuery.ajax({
+                    url: '@Url.Action("Cadastrar", "Amigo")',
+                    type: "POST",
+                    dataType: "json",
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.sucesso) {
+                            window.location.reload();
+
+                        }
+                        else {
+                            swal("Oops", data.mensagem, "error")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    });
+</script>

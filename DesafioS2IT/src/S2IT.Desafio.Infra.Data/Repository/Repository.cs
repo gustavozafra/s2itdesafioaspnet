@@ -27,6 +27,7 @@ namespace S2IT.Desafio.Infra.Data.Repository
 
         public TEntity Atualizar(TEntity obj)
         {
+            Db.Set<TEntity>().Attach(obj);
             Db.Entry(obj).State = EntityState.Modified;
             Db.SaveChanges();
 

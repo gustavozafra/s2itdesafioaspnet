@@ -30,7 +30,6 @@ namespace S2IT.Desafio.Infra.CrossCutting.IoC
             container.Register<IJogoService, JogoService>(Lifestyle.Scoped);
             container.Register<IAmigoService, AmigoService>(Lifestyle.Scoped);
             container.Register<IEmprestimoService, EmprestimoService>(Lifestyle.Scoped);
-            container.Register<IStatusEmprestimoService, StatusEmprestimoService>(Lifestyle.Scoped);
 
             container.Register<IUsuarioAppService, UsuarioAppService>(Lifestyle.Scoped);
             container.Register<IJogoAppService, JogoAppService>(Lifestyle.Scoped);

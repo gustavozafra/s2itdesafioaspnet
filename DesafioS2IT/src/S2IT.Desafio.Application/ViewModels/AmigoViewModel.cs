@@ -8,6 +8,11 @@ namespace S2IT.Desafio.Application.ViewModels
 {
     public class AmigoViewModel
     {
+        public AmigoViewModel()
+        {
+            Emprestimos = new List<EmprestimoViewModel>();
+        }
+
         public long IdAmigo { get; set; }
 
         public string Nome { get; set; }
